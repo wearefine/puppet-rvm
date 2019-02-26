@@ -70,7 +70,7 @@ class rvm::passenger::apache(
     passenger_pool_idle_time        => $poolidletime,
     mod_lib_path                    => $modpath,
     mod_package_ensure              => $package_ensure,
-    passenger_instance_registry_dir => $passenger_instance_registry_dir
+    passenger_instance_registry_dir => $passenger_instance_registry_dir,
     require                         => [ Exec['passenger-install-apache2-module'], File['passenger_module_object'], ],
     subscribe                       => Exec['passenger-install-apache2-module'],
   }
