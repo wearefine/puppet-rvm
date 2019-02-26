@@ -10,7 +10,8 @@ class rvm::passenger::apache(
   $spawnmethod = 'smart-lv2',
   $proxy_url = undef,
   $package_ensure = undef,
-  $install_timeout = 600
+  $install_timeout = 600,
+  $passenger_instance_registry_dir = '/tmp'
 ) {
 
   class { 'rvm::passenger::gem':
@@ -63,14 +64,15 @@ class rvm::passenger::apache(
   }
 
   class { 'apache::mod::passenger':
-    passenger_root           => $gemroot,
-    passenger_ruby           => "${rvm_prefix}/rvm/wrappers/${ruby_version}/ruby",
-    passenger_max_pool_size  => $maxpoolsize,
-    passenger_pool_idle_time => $poolidletime,
-    mod_lib_path             => $modpath,
-    mod_package_ensure       => $package_ensure,
-    require                  => [ Exec['passenger-install-apache2-module'], File['passenger_module_object'], ],
-    subscribe                => Exec['passenger-install-apache2-module'],
+    passenger_root                  => $gemroot,
+    passenger_ruby                  => "${rvm_prefix}/rvm/wrappers/${ruby_version}/ruby",
+    passenger_max_pool_size         => $maxpoolsize,
+    passenger_pool_idle_time        => $poolidletime,
+    mod_lib_path                    => $modpath,
+    mod_package_ensure              => $package_ensure,
+    passenger_instance_registry_dir => $passenger_instance_registry_dir
+    require                         => [ Exec['passenger-install-apache2-module'], File['passenger_module_object'], ],
+    subscribe                       => Exec['passenger-install-apache2-module'],
   }
 
   case $::osfamily {
