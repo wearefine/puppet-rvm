@@ -63,6 +63,13 @@ class rvm::passenger::apache(
     require => Exec['passenger-install-apache2-module'],
   }
 
+  file { $passenger_registry_dir:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0777',
+  }
+
   class { '::apache::mod::passenger':
     passenger_root                  => $gemroot,
     passenger_ruby                  => "${rvm_prefix}/rvm/wrappers/${ruby_version}/ruby",
