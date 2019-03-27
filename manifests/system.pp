@@ -8,12 +8,11 @@ class rvm::system {
 
   apt::ppa { 'ppa:rael-gc/rvm':
     before => Package['rvm'],
-    notify => Exec['apt_update'],
   }
 
   package { 'rvm':
     ensure => 'installed',
-    before => File['/usr/local/'],
+    before => Exec['link_rvm'],
   }
 
   exec { 'link_rvm':
