@@ -16,8 +16,7 @@ class rvm::system {
     before => File['/usr/local/'],
   }
 
-  file { '/usr/local/':
-    ensure => 'link',
-    target => '/usr/share/rvm/',
+  exec { 'link_rvm':
+    command => 'ln -s /usr/share/rvm/ /usr/local',
   }
 }
