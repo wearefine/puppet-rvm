@@ -24,7 +24,7 @@ class rvm(
   }
 
   # rvm::system_user{ $system_users: }
-  create_resources('rvm_system_ruby', $::system_rubies, {'ensure' => present})
+  create_resources('rvm_system_ruby', $system_rubies, {'ensure' => present})
   if $rvm_gems != {} {
     validate_hash($rvm_gems)
     create_resources('rvm_gem', $rvm_gems )

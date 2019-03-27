@@ -4,6 +4,8 @@
 #
 class rvm::system {
 
+  include ::apt
+
   apt::ppa { 'ppa:rael-gc/rvm':
     before => Package['rvm'],
     notify => Exec['apt_update'],
