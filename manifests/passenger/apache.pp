@@ -67,7 +67,7 @@ class rvm::passenger::apache(
     ensure => directory,
     owner  => 'root',
     group  => 'root',
-    mode   => '0777',
+    mode   => '1777',
   }
 
   class { '::apache::mod::passenger':
