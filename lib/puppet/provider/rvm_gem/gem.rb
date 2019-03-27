@@ -33,11 +33,6 @@ Puppet::Type.type(:rvm_gem).provide(:gem) do
       command << '^' + name + '$'
     end
 
-    # use proxy if proxy_url is set
-    if resource[:proxy_url] and !resource[:proxy_url].empty?
-      command << "--http-proxy" << resource[:proxy_url]
-    end
-
     list = []
     begin
       list = execute(command).split("\n").collect do |set|

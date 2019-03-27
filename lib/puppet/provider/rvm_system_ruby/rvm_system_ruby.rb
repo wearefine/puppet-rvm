@@ -50,22 +50,11 @@ Puppet::Type.type(:rvm_system_ruby).provide(:rvm) do
   private
 
   def install
-    unless resource[:proxy_url].nil?
-      ENV['http_proxy']  = resource[:proxy_url]
-      ENV['https_proxy'] = resource[:proxy_url]
-      unless resource[:no_proxy].nil?
-        ENV['no_proxy'] = resource[:no_proxy]
-      end
-    end
     options = Array(resource[:build_opts])
     if resource[:autolib_mode]
       options << "--autolibs #{resource[:autolib_mode]}"
     end
-    if resource[:proxy_url] and !resource[:proxy_url].empty?
-      rvmcmd "install", resource[:name], "--proxy", resource[:proxy_url], *options
-    else
-      rvmcmd "install", resource[:name], *options
-    end
+    rvmcmd "install", resource[:name], *options
   end
 
   def mount
