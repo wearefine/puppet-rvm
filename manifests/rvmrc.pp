@@ -14,6 +14,6 @@ class rvm::rvmrc(
     mode    => '0664',
     owner   => 'root',
     group   => $rvm::params::group,
-    before  => Exec['system-rvm'],
+    before  => Package['rvm'],
   }
 }

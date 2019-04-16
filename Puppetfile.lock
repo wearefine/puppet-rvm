@@ -7,4 +7,5 @@ FORGE
 DEPENDENCIES
   golja-gnupg (>= 1.2.0)
   puppetlabs-stdlib (>= 4.2.0)
+  puppetlabs-apt (>= 6.3.0)
 
