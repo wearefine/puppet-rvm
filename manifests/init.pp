@@ -1,10 +1,12 @@
 # Install RVM, create system user a install system level rubies
 class rvm(
-  $install_rvm=true,
-  $install_dependencies=false,
-  $manage_rvmrc=$rvm::params::manage_rvmrc,
-  $system_rubies={},
-  $rvm_gems={},
+  $install_rvm = true,
+  $install_dependencies = false,
+  $manage_rvmrc = $rvm::params::manage_rvmrc,
+  $system_rubies = {},
+  $rvm_gems = {},
+  $manage_group = $rvm::params::manage_group,
+  $version = $rvm::params::version,
 ) inherits rvm::params {
 
   if $install_rvm {
@@ -16,8 +18,12 @@ class rvm(
       }
     }
 
+    if $manage_group {
+      include ::rvm::group
+    }
+
     if $manage_rvmrc {
-      ensure_resource('class', 'rvm::rvmrc')
+      class { '::rvm::rvmrc': }
     }
 
     class { '::rvm::system': }
@@ -29,7 +35,6 @@ class rvm(
     }
   }
 
-  # create_resources('rvm_system_ruby', $system_rubies, {'ensure' => present})
   if $rvm_gems != {} {
     validate_hash($rvm_gems)
     $rvm_gems.each |String $name, Hash $data| {
