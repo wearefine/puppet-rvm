@@ -4,6 +4,8 @@ class rvm::dependencies::ubuntu {
   $dependencies = [
     'build-essential',
     'software-properties-common',
+    'libcurl4-openssl-dev',
+    'apache2-dev',
   ]
 
   package { $dependencies:

@@ -5,7 +5,7 @@ class rvm::group (
 inherits rvm::params {
 
   group { $group_name :
-    'ensure' => 'present',
-    'system' => true,
-  })
+    ensure => 'present',
+    system => true,
+  }
 }

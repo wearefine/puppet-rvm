@@ -12,11 +12,11 @@ class rvm::system {
 
   package { 'rvm':
     ensure => 'installed',
-    before => Exec['link_rvm'],
+    before => File['/usr/share/rvm/'],
   }
 
-  file { '/usr/share/rvm/':
+  file { '/usr/local':
     ensure => link,
-    target => '/usr/local',
+    target => '/usr/share/rvm/',
   }
 }

@@ -5,11 +5,6 @@ class rvm::params(
   $version = '1.29.7-1',
 ) {
 
-  $manage_rvmrc = $::osfamily ? {
-    'Windows' => false,
-    default   => true,
-  }
-
   $group = $::operatingsystem ? {
     default => 'rvm',
   }
