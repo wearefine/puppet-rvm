@@ -78,6 +78,7 @@ class rvm::passenger::apache(
     mod_lib_path                    => $modpath,
     mod_package_ensure              => $package_ensure,
     passenger_instance_registry_dir => $passenger_registry_dir,
+    passenger_max_instances_per_app => $maxinstancesperapp,
     require                         => [ Exec['passenger-install-apache2-module'], File['passenger_module_object'], ],
     subscribe                       => Exec['passenger-install-apache2-module'],
   }
